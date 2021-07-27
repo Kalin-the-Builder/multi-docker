@@ -21,3 +21,15 @@ afterafter_success:
   - docker push kalin-the-builder/multi-nginx
   - docker push kalin-the-builder/multi-server
   - docker push kalin-the-builder/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: "af-south-1"
+  app: "multi-docker"
+  env: "Multidocker-env"
+  bucket_name: "elasticbeanstalk-af-south-1-524382694030"
+  bucket_path: "docker-multi"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"

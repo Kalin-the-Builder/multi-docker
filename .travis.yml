@@ -4,23 +4,23 @@ services:
   - docker
 
 before_install:
-  - docker build -t kalin-the-builder/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t kalinthebuilder/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true kalin-the-builder/react-test npm test
+  - docker run -e CI=true kalinthebuilder/react-test npm test
 
 afterafter_success:
-  - docker build -t kalin-the-builder/multi-client ./client
-  - docker build -t kalin-the-builder/multi-nginx ./nginx
-  - docker build -t kalin-the-builder/multi-server ./server
-  - docker build -t kalin-the-builder/multi-worker ./worker
+  - docker build -t kalinthebuilder/multi-client ./client
+  - docker build -t kalinthebuilder/multi-nginx ./nginx
+  - docker build -t kalinthebuilder/multi-server ./server
+  - docker build -t kalinthebuilder/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push kalin-the-builder/multi-client
-  - docker push kalin-the-builder/multi-nginx
-  - docker push kalin-the-builder/multi-server
-  - docker push kalin-the-builder/multi-worker
+  - docker push kalinthebuilder/multi-client
+  - docker push kalinthebuilder/multi-nginx
+  - docker push kalinthebuilder/multi-server
+  - docker push kalinthebuilder/multi-worker
 
 deploy:
   provider: elasticbeanstalk
